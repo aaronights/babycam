@@ -1,5 +1,6 @@
 # babycam
-Raspberry Pi Baby Monitor
+# Raspberry Pi Baby Monitor
+
 I put together a project to make a video baby monitoring system. It's something that a parent would use to keep an eye on a resting child with a live video feed to a phone or tablet, and give notifications when the baby wakes or becomes restless.
 
 For this project I opted to connect the Raspberry Pi to a standard network. Setting up WiFi can be done using terminal, but it's much simpler to connect an HDMI monitor and use the Raspbian desktop environment. Set up the Raspberry Pi to use a WiFi network like normal, with the networking icon in the task bar. To make it simpler to find the video stream later, right click on the icon and set the wireless interface to use a static IP address.
