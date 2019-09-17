@@ -14,11 +14,8 @@ Like all of the camera modules, the NoIR camera connects to the Raspberry Pi wit
 I used a hinged plastic mount designed for attaching a GPS to a cars windscreen. Attached to this is an official Raspberry Pi 3 case, mounted upside down. I drilled a hole inside the lid of the case and used mounting tape to secure the camera module on the inside, letting the lens slightly poke out. The short ribbon cable flexed around to the socket on the Raspberry Pi. I also drilled holes and mounted two of these Infrared LED's in the lid. I combined them in series and added the appropriate resistor and used female jumper leads to connect them to the 5v terminal on the GPIO header. It can be a tight fit under the lid, so it is important to be careful that no leads touch any other pins or the main board of the Raspberry Pi.
 
 
-
 The hinged mount is attached to a wall with adhesive picture frame pads - I didn't want to use suction cups as they can be unreliable for long term use. The case with the camera inside is then facing downward from the wall over a babies crib, and the hinge can be adjusted to get an optimal viewing angle.
  
-
-Coding
 To get the baby monitor system up and running I experimented with a few coding options. Python has extensive libraries for interfacing with both the standard and NoIR camera modules, including network streaming options. While coding for the camera in python is extensively customizable, I found that using the server socket transmission commands had significant latency issues when streaming an HD feed over a network. The camera can also be interfaced with by using standard Linux terminal commands and scripting. It's efficient for basic functionality, but isn't very well suited for a complex program like what is required for this project.
 
  
@@ -105,6 +102,7 @@ sudo pip install instapush
 
 I placed this script in the default /home/pi directory and named it 'alert.py'.
 
+```python
 import RPi.GPIO as GPIO   
 import time  
 import os.path  
@@ -119,7 +117,7 @@ if input_state == False and os.path.isfile('active') == False:
             app.notify(event_name='Baby_Monitor', trackers={ 'Baby': 'Louis'})  
             time.sleep(600)  
             os.remove('active')      
-            
+```            
             
 Lines 1 through 4 import the necessary modules for the script.
 Line 5 - 7 sets the numbering system for the GPIO pins on the Raspberry Pi, selects a pin number and sets it up for use as a switch trigger then gives it the variable 'input_state'.
