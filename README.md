@@ -24,12 +24,12 @@ The solution I opted to use is the RPi Cam Web Interface suite. It is very flexi
 
 Before installation the camera needs to be enabled inside of Raspbian. Under Preferences in the main menu load the Raspberry Pi Configuration program and set the camera option to enable. With the camera enabled, installing the Interface software is done by pasting the following lines into a terminal window.
 
-
+```python
 git clone https://github.com/silvanmelchior/RPi_Cam_Web_Interface.git  
 cd RPi_Cam_Web_Interface  
 chmod u+x *.sh  
 ./install.sh  
- 
+``` 
 
 After that you'll see a dialog box with some options. Unless you have specific requirements, hit Enter to start the installation with the default settings. After it has rebooted accessing the software is done by entering the IP address of the Raspberry Pi into a browser. This can be done on the Pi itself or on any device connected to the same network.
 
