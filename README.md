@@ -60,7 +60,7 @@ When motion is detected the named python script will be executed to send out an 
 
 * Threshold: 2100 - This is a tricky one. The motion detection sensitivity is defined by a number between 1 and 2147483647. Every use and scenario is different depending on the sensitivity required. Having the number too high results in it being triggered with no perceivable motion at all. 2100 seemed to work well for me.
 
-* Lightswtich: 55 - Useful when the baby sleeps with the curtains slightly open on an overcast day. This option stops the sun moving out from behind clouds resulting in a false trigger due to the change in lighting.
+* Lightswitch: 55 - Useful when the baby sleeps with the curtains slightly open on an overcast day. This option stops the sun moving out from behind clouds resulting in a false trigger due to the change in lighting.
 
 * Minimum_motion_frames: 3 - The number of consecutive frames that motion needs to be present before the sensor is tripped. A baby doesn't move like The Flash, so having it a little higher than 1 gives less false triggers.
 Under the schedule settings I cleared the boxes under Motion Start and Motion Stop. These are used when recording is to start when motion is detected. For a baby monitor a live alert is required, not a video recording.
