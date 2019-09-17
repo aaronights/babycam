@@ -1,4 +1,3 @@
-# babycam
 # Raspberry Pi Baby Monitor
 
 I put together a project to make a video baby monitoring system. It's something that a parent would use to keep an eye on a resting child with a live video feed to a phone or tablet, and give notifications when the baby wakes or becomes restless.
@@ -12,7 +11,6 @@ Like all of the camera modules, the NoIR camera connects to the Raspberry Pi wit
 
  
 I used a hinged plastic mount designed for attaching a GPS to a cars windscreen. Attached to this is an official Raspberry Pi 3 case, mounted upside down. I drilled a hole inside the lid of the case and used mounting tape to secure the camera module on the inside, letting the lens slightly poke out. The short ribbon cable flexed around to the socket on the Raspberry Pi. I also drilled holes and mounted two of these Infrared LED's in the lid. I combined them in series and added the appropriate resistor and used female jumper leads to connect them to the 5v terminal on the GPIO header. It can be a tight fit under the lid, so it is important to be careful that no leads touch any other pins or the main board of the Raspberry Pi.
-
 
 The hinged mount is attached to a wall with adhesive picture frame pads - I didn't want to use suction cups as they can be unreliable for long term use. The case with the camera inside is then facing downward from the wall over a babies crib, and the hinge can be adjusted to get an optimal viewing angle.
  
@@ -33,30 +31,18 @@ chmod u+x *.sh
 
 After that you'll see a dialog box with some options. Unless you have specific requirements, hit Enter to start the installation with the default settings. After it has rebooted accessing the software is done by entering the IP address of the Raspberry Pi into a browser. This can be done on the Pi itself or on any device connected to the same network.
 
-Screen Interface
+* Screen Interface - I played around with the video resolution, bitrate and framerate setting to get optimal performance over a wireless network. Devices like this are often placed far away from the router and through a few walls, so signal strength may not be the best.
 
-I played around with the video resolution, bitrate and framerate setting to get optimal performance over a wireless network. Devices like this are often placed far away from the router and through a few walls, so signal strength may not be the best.
+* Video res: 720x1280 - I found the sweet spot in resolution to be 720p HD. Opposite to what is normal, I used a vertical 720x1280 video frame to fill the screen of a smart phone when used in portrait mode.
 
-Video res: 720x1280
+* Video fps: 20 - The default 25 frames per second is somewhat overkill for observing a baby that isn't moving very much while sleeping. Bumping the frame rate down to 20 still allows viewers to see if the baby is moving but slightly relaxes the demand it places on the wireless network.
 
-I found the sweet spot in resolution to be 720p HD. Opposite to what is normal, I used a vertical 720x1280 video frame to fill the screen of a smart phone when used in portrait mode.
-
-Video fps: 20
-
-The default 25 frames per second is somewhat overkill for observing a baby that isn't moving very much while sleeping. Bumping the frame rate down to 20 still allows viewers to see if the baby is moving but slightly relaxes the demand it places on the wireless network.
-
-Brightness: 60
-
-Increasing the brightness does wash out the picture a little, but gives more clarity in low light.
+* Brightness: 60 - Increasing the brightness does wash out the picture a little, but gives more clarity in low light.
 Exposure Mode: nightpreview - The NoIR V2 is good in low light, but turning the exposure to nightpreview cleans up the image just a little more.
 
-Image Quality: 100, Preview Quality: 100
+* Image Quality: 100, Preview Quality: 100 - Maxing out the image quality and preview quality didn't seem to have any impact on the streaming performance, but made the overall clarity just a little better. Setting the preview width to 720 allows the live video to be the full quality captured.
 
-Maxing out the image quality and preview quality didn't seem to have any impact on the streaming performance, but made the overall clarity just a little better. Setting the preview width to 720 allows the live video to be the full quality captured.
-
-Motion detect mode: External
-
-I changed the default on screen title to something a bit more appropriate - Baby Cam. I left the complete hours, minutes and seconds time stamp there. Having the seconds constantly counting gives a good indicator that the video feed is live and hasn't malfunctioned.
+* Motion detect mode: External - I changed the default on screen title to something a bit more appropriate - Baby Cam. I left the complete hours, minutes and seconds time stamp there. Having the seconds constantly counting gives a good indicator that the video feed is live and hasn't malfunctioned.
 
 
 There are some settings I had to change manually outside of the web based UI, done by editing the file /etc/raspimjpeg.
@@ -72,20 +58,13 @@ On_event_start: python /etc/home/pi/alert.py
 ```
 When motion is detected the named python script will be executed to send out an alert.
 
-Threshold: 2100
+* Threshold: 2100 - This is a tricky one. The motion detection sensitivity is defined by a number between 1 and 2147483647. Every use and scenario is different depending on the sensitivity required. Having the number too high results in it being triggered with no perceivable motion at all. 2100 seemed to work well for me.
 
-This is a tricky one. The motion detection sensitivity is defined by a number between 1 and 2147483647. Every use and scenario is different depending on the sensitivity required. Having the number too high results in it being triggered with no perceivable motion at all. 2100 seemed to work well for me.
+* Lightswtich: 55 - Useful when the baby sleeps with the curtains slightly open on an overcast day. This option stops the sun moving out from behind clouds resulting in a false trigger due to the change in lighting.
 
-Lightswtich: 55
-
-Useful when the baby sleeps with the curtains slightly open on an overcast day. This option stops the sun moving out from behind clouds resulting in a false trigger due to the change in lighting.
-
-Minimum_motion_frames: 3
-
-The number of consecutive frames that motion needs to be present before the sensor is tripped. A baby doesn't move like The Flash, so having it a little higher than 1 gives less false triggers.
+* Minimum_motion_frames: 3 - The number of consecutive frames that motion needs to be present before the sensor is tripped. A baby doesn't move like The Flash, so having it a little higher than 1 gives less false triggers.
 Under the schedule settings I cleared the boxes under Motion Start and Motion Stop. These are used when recording is to start when motion is detected. For a baby monitor a live alert is required, not a video recording.
 
- 
 
 Unfortunately the motion service can have complications when executing some commands. Searching around, I found that it was a bug that many users have encountered with no great solution. If you find that the alert script isn't executing, starting the motion program out of daemon mode from the command line makes it function properly. It's a work around rather than a solution, but it can be automatically done every time the Raspberry Pi boots. Edit bashrc via the command 'sudo nano .bashrc' and add the line 'motion -n' to the bottom of the file and the problem should be avoided.
 
