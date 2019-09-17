@@ -96,9 +96,9 @@ I used the on_motion_start parameter to trigger and execute a python script that
  
 
 The Instapush API also needs to be installed on the Raspberry Pi, done simply with the following line in a terminal window.
-
+```
 sudo pip install instapush  
- 
+``` 
 
 I placed this script in the default /home/pi directory and named it 'alert.py'.
 
