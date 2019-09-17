@@ -67,9 +67,9 @@ Changing the pre existing line motion_detection from false to true makes the sys
 
 Motion sensing
 I implemented a system to send alerts when the baby starts to get restless during nap time. The RPi Cam Web Interface has integrated motion sensing algorithms that are well suited to detecting both subtle and more obvious motion. I tuned through trial and error and ended up with the following settings, configured under the 'Edit motion settings' button on the default index page.
-
+```
 On_event_start: python /etc/home/pi/alert.py 
-
+```
 When motion is detected the named python script will be executed to send out an alert.
 
 Threshold: 2100
