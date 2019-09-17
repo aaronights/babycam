@@ -119,15 +119,15 @@ if input_state == False and os.path.isfile('active') == False:
             os.remove('active')      
 ```            
             
-Lines 1 through 4 import the necessary modules for the script.
-Line 5 - 7 sets the numbering system for the GPIO pins on the Raspberry Pi, selects a pin number and sets it up for use as a switch trigger then gives it the variable 'input_state'.
-Line 8 is a if statement to check two conditions:
+*Lines 1 through 4 import the necessary modules for the script.
+*Line 5 - 7 sets the numbering system for the GPIO pins on the Raspberry Pi, selects a pin number and sets it up for use as a switch trigger then gives it the variable 'input_state'.
+*Line 8 is a if statement to check two conditions:
 If the switch attached between GPIO pin 4 and a ground pin is active. I put a jumper to bridge pin 4 to the neighbouring ground pin. Removing the jumper disables the notifications from being sent.
 If a file named 'active' is in the current directory. This is part of the method used to ensure that notifications are only sent once every 10 minutes to prevent a huge flood of alerts being sent consecutively.
-Line 9 creates a blank file titled 'active' in the current directory.
-Lines 10 and 11 are the Instapush provided code to trigger the sending of notifications.
-Line 12 waits for 600 seconds, or 10 minutes.
-Line 13 deletes the file 'active'.
+*Line 9 creates a blank file titled 'active' in the current directory.
+*Lines 10 and 11 are the Instapush provided code to trigger the sending of notifications.
+*Line 12 waits for 600 seconds, or 10 minutes.
+*Line 13 deletes the file 'active'.
 
 
 The NoIR V2 camera is a great way to get clear images in low light situations, and the increased fidelity with the V2 makes for great quality images and videos. Outside of just monitoring sleeping babies, combining the Interface, the NoIR camera and a Raspberry Pi 3 together can make a very sophisticated security camera system. More than sending alerts, a relay could be added to the system to sound an alarm, turn the lights on in a room or lock a door with a solenoid. Nearly anything that a Raspberry Pi can do is able to be triggered by detecting motion. Plus the whole unit is smaller and cheaper yet higher fidelity than many commercial surveillance systems. Combining it with a big source of Infrared light, such as an array of LED's or a large bulb, the NoIR V2 camera could view a large area in absolute darkness.
